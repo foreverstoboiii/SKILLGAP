@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SkillGap — ИИ-карта разрыва между образованием и рынком труда Узбекистана</title>
+  <meta name="description" content="SkillGap — SaaS-платформа на базе NLP и графа знаний: сравнивает навыки студента с живыми требованиями рынка труда Узбекистана и строит персональный план развития.">
+  <meta name="theme-color" content="#07080b">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="progress"><span id="progress-bar"></span></div>
+
+  <header class="topbar">
+    <a href="#s-hero" class="logo" id="logo-link">
+      <span class="logo-mark"><i></i><i></i></span>SkillGap
+    </a>
+    <div class="topbar-right">
+      <span class="counter" id="counter">01 / 13</span>
+      <button class="icon-btn" id="btn-fullscreen" title="Полный экран (F)" aria-label="Полный экран">
+        <svg viewBox="0 0 24 24" width="18" height="18"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <nav class="sidenav" id="sidenav" aria-label="Навигация по слайдам"></nav>
+
+  <main>
+
+    <!-- 01 HERO -->
+    <section class="slide hero" id="s-hero" data-title="SkillGap">
+      <canvas id="graph-bg" aria-hidden="true"></canvas>
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow reveal">Грантовый проект · Ташкент · 2026</p>
+          <h1 class="display reveal">Между дипломом и&nbsp;работой — <span class="gap-word">разрыв</span>.<br>Мы его измеряем.</h1>
+          <p class="lead reveal">SkillGap — ИИ-платформа, которая сравнивает навыки студента с живыми требованиями рынка труда Узбекистана и за секунды строит персональную карту разрыва.</p>
+          <div class="hero-cta reveal">
+            <a href="#s-demo" class="btn btn-primary" id="btn-hero-demo">Смотреть демо</a>
+            <a href="#s-compliance" class="btn btn-ghost" id="btn-hero-criteria">Соответствие регламенту</a>
+          </div>
+          <p class="hint reveal"><kbd>↓</kbd> <kbd>Space</kbd> — следующий слайд &nbsp;·&nbsp; <kbd>F</kbd> — полный экран</p>
+        </div>
+
+        <div class="hero-card glass reveal">
+          <div class="hc-head">
+            <div class="avatar">А</div>
+            <div class="hc-who"><b>Азиз К.</b><span>4 курс · цель: Frontend Junior</span></div>
+            <span class="tag-live"><i></i>live</span>
+          </div>
+          <div class="gauge">
+            <svg viewBox="0 0 120 120">
+              <defs>
+                <linearGradient id="gGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#3df2c4"/><stop offset="1" stop-color="#8b7bff"/>
+                </linearGradient>
+              </defs>
+              <circle class="g-track" cx="60" cy="60" r="52"/>
+              <circle class="g-val" id="hero-gauge" cx="60" cy="60" r="52"/>
+            </svg>
+            <div class="gauge-num"><span id="hero-pct">0</span><em>%</em><small>совпадение с рынком</small></div>
+          </div>
+          <div class="chips">
+            <span class="chip ok">HTML/CSS</span><span class="chip ok">JavaScript</span><span class="chip ok">Figma</span>
+            <span class="chip miss">React</span><span class="chip miss">Git</span><span class="chip miss">REST API</span>
+          </div>
+          <div class="hc-foot"><span>Сверено с 4 812 вакансиями</span><span class="mono">2.4 сек</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 PARADOX -->
+    <section class="slide" id="s-paradox" data-title="Парадокс">
+      <span class="ghost">02</span>
+      <div class="wrap">
+        <p class="eyebrow reveal">Проблема</p>
+        <h2 class="h2 reveal">Парадокс рынка труда</h2>
+        <div class="paradox">
+          <div class="side side-a reveal">
+            <div class="dots" id="dots-a"></div>
+            <span class="big">Тысячи</span>
+            <p>выпускников не&nbsp;могут найти работу</p>
+          </div>
+          <div class="divider reveal"><span>≠</span></div>
+          <div class="side side-b reveal">
+            <div class="dots" id="dots-b"></div>
+            <span class="big">Тысячи</span>
+            <p>компаний месяцами не&nbsp;могут закрыть Junior-вакансии</p>
+          </div>
+        </div>
+        <p class="statement reveal">Люди есть. Вакансии есть. <em>Моста между ними — нет.</em><br>Это структурная безработица молодёжи — одна из острейших макроэкономических проблем Узбекистана.</p>
+      </div>
+    </section>
+
+    <!-- 03 PROBLEMS -->
+    <section class="slide" id="s-problems" data-title="Три причины">
+      <span class="ghost">03</span>
+      <div class="wrap">
+        <p class="eyebrow reveal">Корень проблемы</p>
+        <h2 class="h2 reveal">Три разрыва, которые никто не измеряет</h2>
+        <div class="cards-3">
+          <article class="pcard glass reveal">
+            <span class="pnum">01</span>
+            <h3>Слепота программ</h3>
+            <p class="pain">Вузы учат по программам пятилетней давности — у них нет инструмента, чтобы видеть рынок в реальном времени.</p>
+            <div class="fix"><span>Решение</span>Онлайн-мониторинг требований рынка для деканата.</div>
+          </article>
+          <article class="pcard glass reveal">
+            <span class="pnum">02</span>
+            <h3>Информационный вакуум</h3>
+            <p class="pain">Студент получает отказ от HR — но никто не объясняет, <i>почему</i>.</p>
+            <div class="fix"><span>Решение</span>Мгновенная обратная связь ещё до отправки резюме.</div>
+          </article>
+          <article class="pcard glass reveal">
+            <span class="pnum">03</span>
+            <h3>Ошибки упаковки</h3>
+            <p class="pain">Навык есть, но описан академическим языком — HR-фильтры его не распознают.</p>
+            <div class="fix"><span>Решение</span>ИИ-адаптация лексики резюме под корпоративный стандарт.</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 HOW -->
+    <section class="slide" id="s-how" data-title="Как работает">
+      <span class="ghost">04</span>
+      <div class="wrap">
+        <p class="eyebrow reveal">Решение</p>
+        <h2 class="h2 reveal">Три шага. Несколько секунд.</h2>
+        <div class="steps">
+          <div class="step reveal">
+            <div class="step-ic">
+              <svg viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z M14 3v6h6 M12 18v-6 M9 15l3-3 3 3"/></svg>
+            </div>
+            <span class="step-n">01</span>
+            <h3>Загрузка</h3>
+            <p>Резюме в PDF/DOCX или ссылка на GitHub / LinkedIn — прямо в Telegram.</p>
+          </div>
+          <div class="step-line reveal"><i></i></div>
+          <div class="step reveal">
+            <div class="step-ic">
+              <svg viewBox="0 0 24 24"><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.3 11l7.4-3.8M8.3 13l7.4 3.8"/></svg>
+            </div>
+            <span class="step-n">02</span>
+            <h3>Анализ</h3>
+            <p>NER извлекает навыки, граф знаний сопоставляет их с тысячами актуальных вакансий.</p>
+          </div>
+          <div class="step-line reveal"><i></i></div>
+          <div class="step reveal">
+            <div class="step-ic">
+              <svg viewBox="0 0 24 24"><path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3z M9 3v15 M15 6v15"/></svg>
+            </div>
+            <span class="step-n">03</span>
+            <h3>Карта разрыва</h3>
+            <p>% совпадения, недостающие навыки по приоритету и пошаговый план на 90 дней.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 DEMO -->
+    <section class="slide" id="s-demo" data-title="Демо">
+      <span class="ghost">05</span>
+      <div class="wrap">
+        <div class="head-row">
+          <div>
+            <p class="eyebrow reveal">Интерактивное демо</p>
+            <h2 class="h2 reveal">SkillGap Map в действии</h2>
+          </div>
+          <p class="note reveal">Выберите профессию — карта перестроится</p>
+        </div>
+        <div class="demo glass reveal">
+          <div class="demo-tabs" role="tablist" id="demo-tabs">
+            <button class="tab active" data-role="frontend" id="tab-frontend">Frontend Junior</button>
+            <button class="tab" data-role="data" id="tab-data">Data Analyst</button>
+            <button class="tab" data-role="backend" id="tab-backend">Java Backend</button>
+            <button class="tab" data-role="marketing" id="tab-marketing">Digital-маркетолог</button>
+          </div>
+          <div class="demo-body">
+            <div class="radar-wrap">
+              <svg id="radar" viewBox="0 0 440 400" aria-label="Радарная диаграмма навыков"></svg>
+              <div class="legend">
+                <span><i class="lg-market"></i>Требования рынка</span>
+                <span><i class="lg-you"></i>Профиль студента</span>
+              </div>
+            </div>
+            <div class="demo-side">
+              <div class="match">
+                <div class="match-num"><span id="match-num">0</span><em>%</em></div>
+                <div class="match-txt">совпадение<br>с рынком</div>
+              </div>
+              <h4>Критические пробелы</h4>
+              <ul class="gap-list" id="gap-list"></ul>
+              <h4>План на 90 дней</h4>
+              <ol class="plan-list" id="plan-list"></ol>
+            </div>
+          </div>
+          <p class="demo-foot">Демонстрационные данные. В продукте — расчёт по реальной базе вакансий, обновляемой ежедневно.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 SCIENCE -->
+    <section class="slide" id="s-science" data-title="Наука">
+      <span class="ghost">06</span>
+      <div class="wrap">
+        <div class="head-row">
+          <div>
+            <p class="eyebrow reveal">Критерий 1 · Ilmiy dalil va asosga ega boʻlishi</p>
+            <h2 class="h2 reveal">Не догадки — Data Science</h2>
+          </div>
+          <p class="note reveal">Три научных опоры системы</p>
+        </div>
+        <div class="cards-3 sci">
+          <article class="scard glass reveal">
+            <span class="s-tag">Ontological Engineering</span>
+            <h3>Граф знаний</h3>
+            <svg class="kg" viewBox="0 0 400 300" aria-label="Граф знаний">
+              <g class="edges">
+                <path d="M95 150 C150 150 150 70 200 70"/><path d="M95 150 L200 150"/><path d="M95 150 C150 150 150 230 200 230"/>
+                <path d="M270 70 L320 40"/><path d="M270 70 L320 100"/>
+                <path d="M270 150 L320 150"/>
+                <path d="M270 230 L320 205"/><path d="M270 230 L320 262"/>
+              </g>
+              <g class="n-prof"><rect x="10" y="132" width="88" height="36" rx="18"/><text x="54" y="155">Frontend</text></g>
+              <g class="n-skill"><rect x="196" y="56" width="78" height="28" rx="14"/><text x="235" y="74">Компоненты</text></g>
+              <g class="n-skill"><rect x="196" y="136" width="78" height="28" rx="14"/><text x="235" y="154">Версии</text></g>
+              <g class="n-skill"><rect x="196" y="216" width="78" height="28" rx="14"/><text x="235" y="234">API</text></g>
+              <g class="n-tool"><rect x="318" y="28" width="70" height="24" rx="12"/><text x="353" y="44">React</text></g>
+              <g class="n-tool"><rect x="318" y="88" width="70" height="24" rx="12"/><text x="353" y="104">Vue</text></g>
+              <g class="n-tool"><rect x="318" y="138" width="70" height="24" rx="12"/><text x="353" y="154">Git</text></g>
+              <g class="n-tool"><rect x="318" y="193" width="70" height="24" rx="12"/><text x="353" y="209">REST</text></g>
+              <g class="n-tool"><rect x="318" y="250" width="70" height="24" rx="12"/><text x="353" y="266">GraphQL</text></g>
+            </svg>
+            <p>Рынок — сеть связанных узлов <b>Профессия → Навык → Инструмент</b>. Связь вакансии и студента обосновывается вычислением <b>семантической близости</b>.</p>
+            <code class="formula">sim(React.js, React) = 0.97</code>
+          </article>
+
+          <article class="scard glass reveal">
+            <span class="s-tag">NLP / NER</span>
+            <h3>Понимание контекста</h3>
+            <div class="ner">
+              <p class="ner-text">Ищем Junior: <mark class="e-tool">React.js</mark>, <mark class="e-tool">TypeScript</mark>, опыт с <mark class="e-lang">Java</mark> и <mark class="e-tool">Spring</mark>, <mark class="e-soft">английский B1+</mark>.</p>
+              <div class="ner-out">
+                <div><span>React.js</span><b>→ React</b><i>синоним</i></div>
+                <div><span>Java</span><b>→ язык программирования</b><i>контекст: Spring</i></div>
+                <div><span>английский B1+</span><b>→ English ≥ B1</b><i>язык</i></div>
+              </div>
+            </div>
+            <p>Извлечение именованных сущностей из неструктурированных текстов вакансий и резюме на <b>русском, узбекском и английском</b>.</p>
+          </article>
+
+          <article class="scard glass reveal">
+            <span class="s-tag">Predictive Analytics</span>
+            <h3>Прогноз трендов</h3>
+            <svg class="chart" id="trend-chart" viewBox="0 0 400 220" aria-label="Прогноз спроса"></svg>
+            <p>Модель на исторических данных выявляет тренды — например, рост спроса на <b>Python в финсекторе на 15% за квартал</b> — и даёт студенту рекомендации <b>на опережение</b>.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 PRODUCT -->
+    <section class="slide" id="s-product" data-title="Продукт">
+      <span class="ghost">07</span>
+      <div class="wrap">
+        <div class="head-row">
+          <div>
+            <p class="eyebrow reveal">Критерий 2 · Mahsulot yoki xizmat turini yaratish</p>
+            <h2 class="h2 reveal">Готовый SaaS из трёх модулей</h2>
+          </div>
+          <p class="note reveal">Не исследование «в стол» — продукт</p>
+        </div>
+        <div class="cards-3 product">
+          <article class="mcard glass reveal">
+            <div class="m-visual">
+              <div class="phone">
+                <div class="ph-notch"></div>
+                <div class="ph-head"><span class="ph-dot"></span>SkillGap · Mini App</div>
+                <div class="ph-score"><b>63%</b><span>Frontend Junior</span></div>
+                <div class="ph-bar"><i style="width:63%"></i></div>
+                <div class="ph-task">
+                  <small>Задача дня · 15 мин</small>
+                  Создать первый репозиторий на GitHub
+                </div>
+                <div class="ph-task dim">
+                  <small>Завтра</small>
+                  Компонент кнопки на React
+                </div>
+              </div>
+            </div>
+            <span class="m-tag">B2C · Студент</span>
+            <h3>Telegram Mini App</h3>
+            <ul>
+              <li>Без скачивания приложений</li>
+              <li>Загрузка резюме, парсинг GitHub / LinkedIn</li>
+              <li>Радар навыков, прогресс, микро-задачи</li>
+            </ul>
+          </article>
+
+          <article class="mcard glass reveal">
+            <div class="m-visual">
+              <div class="pipe">
+                <div class="pipe-src"><span>hh.uz</span><span>OLX</span><span>Telegram</span></div>
+                <div class="pipe-flow"><i></i></div>
+                <div class="pipe-node">Парсеры по расписанию</div>
+                <div class="pipe-flow"><i></i></div>
+                <div class="pipe-node accent">NER · Граф знаний · Matching</div>
+                <div class="pipe-flow"><i></i></div>
+                <div class="pipe-node out">SkillGap Map</div>
+              </div>
+            </div>
+            <span class="m-tag">Core · Backend & AI</span>
+            <h3>AI Engine</h3>
+            <ul>
+              <li>До <b>5 000</b> вакансий в сутки по Узбекистану</li>
+              <li>Сбор через API и парсеры по расписанию</li>
+              <li>Карта разрыва — за секунды</li>
+            </ul>
+          </article>
+
+          <article class="mcard glass reveal">
+            <div class="m-visual">
+              <div class="mini-dash">
+                <div class="md-row"><span>Алгоритмы</span><i style="--v:80%"></i><b>80%</b></div>
+                <div class="md-row"><span>SQL</span><i style="--v:48%"></i><b>48%</b></div>
+                <div class="md-row warn"><span>Git</span><i style="--v:15%"></i><b>15%</b></div>
+                <div class="md-row warn"><span>Docker</span><i style="--v:15%"></i><b>15%</b></div>
+                <div class="md-cap">Факультет ИТ · 4 курс</div>
+              </div>
+            </div>
+            <span class="m-tag">B2B · Вуз</span>
+            <h3>University Dashboard</h3>
+            <ul>
+              <li>Для деканатов и ректората</li>
+              <li>Тепловая карта по курсу и факультету</li>
+              <li>Данные для обновления учебных планов</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 08 HEATMAP -->
+    <section class="slide" id="s-heatmap" data-title="Дашборд вуза">
+      <span class="ghost">08</span>
+      <div class="wrap">
+        <div class="head-row">
+          <div>
+            <p class="eyebrow reveal">B2B · University Dashboard</p>
+            <h2 class="h2 reveal">Вуз впервые видит разрыв</h2>
+          </div>
+          <p class="note reveal">Нажмите на ячейку</p>
+        </div>
+        <div class="heat-grid">
+          <div class="heat glass reveal">
+            <div class="heat-table" id="heat-table"></div>
+            <div class="heat-scale"><span>0%</span><i></i><span>100%</span></div>
+          </div>
+          <aside class="insight glass reveal" id="insight">
+            <span class="s-tag">Инсайт</span>
+            <h3 id="ins-title">ИТ × Docker</h3>
+            <div class="ins-nums">
+              <div><b id="ins-have">15%</b><span>соответствие студентов</span></div>
+              <div><b id="ins-need">64%</b><span>вакансий требуют</span></div>
+            </div>
+            <p id="ins-text">Критический разрыв. Рекомендация: добавить практический модуль в учебный план.</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- 09 BUSINESS -->
+    <section class="slide" id="s-business" data-title="Бизнес-модель">
+      <span class="ghost">09</span>
+      <div class="wrap">
+        <div class="head-row">
+          <div>
+            <p class="eyebrow reveal">Критерий 4 · Startap loyihani shakllantirish</p>
+            <h2 class="h2 reveal">Венчурный бизнес, а не академический проект</h2>
+          </div>
+        </div>
+        <div class="cards-3 biz">
+          <article class="bcard glass reveal">
+            <span class="b-who">B2C · Студенты</span>
+            <h3>Freemium</h3>
+            <div class="tier"><span class="free">Бесплатно</span>% совпадения с рынком</div>
+            <div class="tier"><span class="paid">Подписка</span>План развития на 90 дней + ИИ-переписывание резюме</div>
+            <div class="pay"><span>Payme</span><span>Click</span></div>
+          </article>
+          <article class="bcard glass reveal">
+            <span class="b-who">B2B · Вузы и учебные центры</span>
+            <h3>SaaS-лицензия</h3>
+            <div class="tier"><span class="paid">Годовая</span>Доступ к аналитическим дашбордам</div>
+            <p class="b-why">Вуз повышает KPI по трудоустройству выпускников — а это национальная метрика.</p>
+          </article>
+          <article class="bcard glass reveal">
+            <span class="b-who">B2B · HR и компании</span>
+            <h3>Skill-квесты</h3>
+            <div class="tier"><span class="paid">Лидогенерация</span>«Изучи X, сдай тест — получи приглашение на стажировку»</div>
+            <p class="b-why">Компании получают подготовленных кандидатов, студенты — понятный путь в профессию.</p>
+          </article>
+        </div>
+        <div class="scale reveal">
+          <span class="scale-label">Масштабирование</span>
+          <div class="scale-path">
+            <div class="sp-node on"><i></i>Ташкент</div>
+            <div class="sp-node"><i></i>Узбекистан</div>
+            <div class="sp-node"><i></i>Казахстан</div>
+            <div class="sp-node"><i></i>Центральная Азия</div>
+          </div>
+          <p>Новый рынок = новый источник парсинга. Архитектура не привязана к одному вузу или стране.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 ROADMAP -->
+    <section class="slide" id="s-roadmap" data-title="План">
+      <span class="ghost">10</span>
+      <div class="wrap">
+        <div class="head-row">
+          <div>
+            <p class="eyebrow reveal">Механизм реализации · Amalga oshirish mexanizmi</p>
+            <h2 class="h2 reveal">6 месяцев до выхода на рынок</h2>
+          </div>
+        </div>
+        <div class="roadmap reveal">
+          <div class="rm-months">
+            <span>М1</span><span>М2</span><span>М3</span><span>М4</span><span>М5</span><span>М6</span>
+          </div>
+          <div class="rm-track"><i></i></div>
+          <div class="rm-phases">
+            <div class="rm-phase" style="--s:1;--e:3">
+              <b>R&D и Data Engineering</b>
+              <p>Облачные мощности. Парсеры hh.uz, OLX, IT/маркетинг Telegram-каналов. Словари синонимов узбекского и русского корпоративного сленга.</p>
+            </div>
+            <div class="rm-phase" style="--s:3;--e:5">
+              <b>Development</b>
+              <p>Логика сопоставления профилей. Интеграция LLM для суммаризации. Вёрстка Telegram Mini App.</p>
+            </div>
+            <div class="rm-phase" style="--s:5;--e:6">
+              <b>QA и пилот</b>
+              <p>Закрытый тест на <b>300 студентах</b> выпускного курса ТАУК.</p>
+            </div>
+            <div class="rm-phase" style="--s:6;--e:7">
+              <b>Traction</b>
+              <p>Замер Interview Rate. B2B-оффер ректорату.</p>
+            </div>
+          </div>
+        </div>
+        <div class="kpis">
+          <div class="kpi glass reveal"><b data-count="300">0</b><span>студентов в пилоте</span></div>
+          <div class="kpi glass reveal"><b data-count="5000" data-fmt="space">0</b><span>вакансий в сутки</span></div>
+          <div class="kpi glass reveal"><b data-count="90">0</b><span>дней — план развития</span></div>
+          <div class="kpi glass reveal"><b>Interview&nbsp;Rate</b><span>ключевая метрика успеха</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11 BUDGET -->
+    <section class="slide" id="s-budget" data-title="Смета">
+      <span class="ghost">11</span>
+      <div class="wrap">
+        <div class="head-row">
+          <div>
+            <p class="eyebrow reveal">Xarajatlar smetasi</p>
+            <h2 class="h2 reveal">Каждый сум — на результат</h2>
+          </div>
+        </div>
+        <div class="budget">
+          <div class="donut-wrap reveal">
+            <svg class="donut" id="donut" viewBox="0 0 200 200"></svg>
+            <div class="donut-center">
+              <b>46,5</b>
+              <span>млн сум</span>
+              <small>6 месяцев</small>
+            </div>
+          </div>
+          <div class="b-items">
+            <article class="b-item reveal" data-seg="0">
+              <div class="bi-head"><i style="--c:var(--you)"></i><span>Статья 1 · Инфраструктура и расходные материалы</span><b>15 000 000</b></div>
+              <p>Облачные серверы на 6 месяцев (Node.js + PostgreSQL + парсеры) · AI/NLP API для семантического анализа · домен .uz и SSL для защиты персональных данных.</p>
+            </article>
+            <article class="b-item reveal" data-seg="1">
+              <div class="bi-head"><i style="--c:var(--violet)"></i><span>Статья 2 · Оборудование</span><b>24 000 000</b></div>
+              <p>Высокопроизводительная рабочая станция для разработки, Docker-окружения и тестирования нейросетей. <b>Капитальный актив</b> — остаётся на балансе проекта.</p>
+            </article>
+            <article class="b-item reveal" data-seg="2">
+              <div class="bi-head"><i style="--c:var(--market)"></i><span>Статья 3 · Акселерация и выход на рынок</span><b>7 500 000</b></div>
+              <p>Пилот на 300 студентах, фокус-группы, QR-материалы · Figma Pro, Jira · регистрация ПО в Минюсте (свидетельство DGU) — рост рейтинга ТАУК в инновационных метриках.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12 COMPLIANCE -->
+    <section class="slide" id="s-compliance" data-title="Регламент">
+      <span class="ghost">12</span>
+      <div class="wrap">
+        <div class="head-row">
+          <div>
+            <p class="eyebrow reveal">Соответствие регламенту конкурса</p>
+            <h2 class="h2 reveal">Все критерии закрыты</h2>
+          </div>
+        </div>
+        <div class="checks">
+          <a href="#s-science" class="check glass reveal" id="chk-1">
+            <span class="ck"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+            <div><small>Ilmiy dalil va asosga ega boʻlishi</small><b>Научное обоснование</b><p>Граф знаний, NER, предиктивная аналитика</p></div>
+            <span class="arrow">→</span>
+          </a>
+          <a href="#s-product" class="check glass reveal" id="chk-2">
+            <span class="ck"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+            <div><small>Mahsulot yoki xizmat turini yaratish</small><b>Конкретный продукт</b><p>SaaS: Mini App, AI Engine, University Dashboard</p></div>
+            <span class="arrow">→</span>
+          </a>
+          <a href="#s-paradox" class="check glass reveal" id="chk-3">
+            <span class="ck"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+            <div><small>Mavjud muammolarga yechim boʻlishi</small><b>Решение реальной проблемы</b><p>Структурная безработица молодёжи</p></div>
+            <span class="arrow">→</span>
+          </a>
+          <a href="#s-business" class="check glass reveal" id="chk-4">
+            <span class="ck"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+            <div><small>Startap loyihani shakllantirish</small><b>Потенциал стартапа</b><p>Три потока выручки, масштаб на Центральную Азию</p></div>
+            <span class="arrow">→</span>
+          </a>
+          <a href="#s-roadmap" class="check glass reveal" id="chk-5">
+            <span class="ck"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+            <div><small>Amalga oshirish mexanizmi</small><b>Механизм реализации</b><p>6-месячный план и прозрачная смета</p></div>
+            <span class="arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13 FINAL -->
+    <section class="slide final" id="s-final" data-title="Итог">
+      <div class="final-glow" aria-hidden="true"></div>
+      <div class="wrap final-inner">
+        <p class="eyebrow reveal">Итог</p>
+        <h2 class="display reveal">Прикладная наука,<br>упакованная в&nbsp;<span class="grad">продукт</span>.</h2>
+        <p class="lead reveal">SkillGap превращает разрыв между образованием и рынком труда из невидимой проблемы в измеримую метрику — для студента, вуза и государства.</p>
+        <div class="final-facts reveal">
+          <div><b>46,5 млн</b><span>сум — запрашиваемый грант</span></div>
+          <div><b>6 мес</b><span>до выхода на рынок</span></div>
+          <div><b>300</b><span>студентов в пилоте</span></div>
+        </div>
+        <p class="thanks reveal">Rahmat! &nbsp;·&nbsp; Спасибо за внимание</p>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
